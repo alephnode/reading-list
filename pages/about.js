@@ -11,11 +11,12 @@ export default function HomePage() {
 
       <main>
         <h1 className="title">
-        ward's reading list
+          about
         </h1>
 
         <p className="description">
-        <Link href="/about"><a>about this list</a></Link>
+          this list is an exploration of the NextJS framework and consuming a Hasura-based GraphQL API from it. Fun stuff.<br/>
+          <Link href="/"><a>back home</a></Link>
         </p>
 
       </main>
@@ -138,3 +139,4 @@ export default function HomePage() {
     </div>
   )
 }
+
