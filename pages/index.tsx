@@ -2,8 +2,9 @@ import Head from 'next/head'
 import Link from 'next/link'
 import fetchAPI from '../lib/fetchAPI'
 import { getBooksQuery } from '../queries'
+import { GetServerSideProps } from 'next'
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const { books } = await fetchAPI(getBooksQuery)
 
   return {

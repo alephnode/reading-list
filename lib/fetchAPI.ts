@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 
-export default async function fetchAPI(query, { variables } = {}) {
+export default async function fetchAPI(query) {
   const headers = {
     'Content-Type': 'application/json',
     'x-hasura-admin-secret': process.env.HASURA_ACCESS_SECRET,
@@ -12,7 +12,6 @@ export default async function fetchAPI(query, { variables } = {}) {
       headers,
       body: JSON.stringify({
         query,
-        variables,
       }),
     })
   ).json()
