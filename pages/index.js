@@ -1,19 +1,19 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import fetchAPI from '../lib/fetchAPI'
-import {getBooksQuery} from '../queries'
+import { getBooksQuery } from '../queries'
 
 export async function getServerSideProps() {
-  const {books }= await fetchAPI(getBooksQuery)
+  const { books } = await fetchAPI(getBooksQuery)
 
   return {
     props: {
-      books
+      books,
     },
   }
 }
 
-export default function HomePage({books}) {
+export default function HomePage({ books }) {
   return (
     <div className="container">
       <Head>
@@ -22,24 +22,20 @@ export default function HomePage({books}) {
       </Head>
 
       <main>
-        <h1 className="title">
-        ward's reading list
-        </h1>
+        <h1 className="title">ward's reading list</h1>
 
         <p className="description">
-        <Link href="/about"><a>about this list</a></Link>
+          <Link href="/about">
+            <a>about this list</a>
+          </Link>
         </p>
 
-          {
-            books.map(book => 
-                <p key={book.id}>{book.name}</p>
-            )
-          }
+        {books.map((book) => (
+          <p key={book.id}>{book.name}</p>
+        ))}
       </main>
 
-      <footer>
-        2020 alephnode
-      </footer>
+      <footer>2020 alephnode</footer>
 
       <style jsx>{`
         .container {

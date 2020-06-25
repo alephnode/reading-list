@@ -10,20 +10,19 @@ export default function HomePage() {
       </Head>
 
       <main>
-        <h1 className="title">
-          about
-        </h1>
+        <h1 className="title">about</h1>
 
         <p className="description">
-          this list is an exploration of the NextJS framework and consuming a Hasura-based GraphQL API from it. Fun stuff.<br/>
-          <Link href="/"><a>back home</a></Link>
+          this list is an exploration of the NextJS framework and consuming a
+          Hasura-based GraphQL API from it. Fun stuff.
+          <br />
+          <Link href="/">
+            <a>back home</a>
+          </Link>
         </p>
-
       </main>
 
-      <footer>
-        2020 alephnode
-      </footer>
+      <footer>2020 alephnode</footer>
 
       <style jsx>{`
         .container {
@@ -139,4 +138,3 @@ export default function HomePage() {
     </div>
   )
 }
-
