@@ -1,7 +1,19 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import fetchAPI from '../lib/fetchAPI'
+import {getBooksQuery} from '../queries'
 
-export default function HomePage() {
+export async function getServerSideProps() {
+  const {books }= await fetchAPI(getBooksQuery)
+
+  return {
+    props: {
+      books
+    },
+  }
+}
+
+export default function HomePage({books}) {
   return (
     <div className="container">
       <Head>
@@ -18,6 +30,11 @@ export default function HomePage() {
         <Link href="/about"><a>about this list</a></Link>
         </p>
 
+          {
+            books.map(book => 
+                <p key={book.id}>{book.name}</p>
+            )
+          }
       </main>
 
       <footer>
