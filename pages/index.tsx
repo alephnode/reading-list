@@ -36,7 +36,7 @@ export default function HomePage({ books }) {
         ))}
       </main>
 
-      <footer>2020 alephnode</footer>
+      <footer>{new Date().getFullYear()} alephnode</footer>
 
       <style jsx>{`
         .container {
