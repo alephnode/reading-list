@@ -16,6 +16,5 @@ export default async function fetchAPI(query) {
     })
   ).json()
 
-  if (res.error) console.log(res.error)
-  return res.data
+  return res
 }

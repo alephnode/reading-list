@@ -5,16 +5,17 @@ import { getBooksQuery } from '../queries'
 import { GetServerSideProps } from 'next'
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { books } = await fetchAPI(getBooksQuery)
+  const { data = {}, errors } = await fetchAPI(getBooksQuery)
 
   return {
     props: {
-      books,
+      status: errors ? 'error' : 'success',
+      books: data.books || null,
     },
   }
 }
 
-export default function HomePage({ books }) {
+export default function HomePage({ books, status }) {
   return (
     <div className="container">
       <Head>
@@ -30,10 +31,11 @@ export default function HomePage({ books }) {
             <a>about this list</a>
           </Link>
         </p>
-
-        {books.map((book) => (
-          <p key={book.id}>{book.name}</p>
-        ))}
+        {status === 'success' ? (
+          books.map((book) => <p key={book.id}>{book.name}</p>)
+        ) : (
+          <p>error with request</p>
+        )}
       </main>
 
       <footer>{new Date().getFullYear()} alephnode</footer>
