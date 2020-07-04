@@ -1,21 +1,8 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import fetchAPI from '../lib/fetchAPI'
-import { getBooksQuery } from '../queries'
-import { GetServerSideProps } from 'next'
+import { insertBookAuthor } from '../mutations'
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { data = {}, errors } = await fetchAPI(getBooksQuery)
-
-  return {
-    props: {
-      status: errors ? 'error' : 'success',
-      books: data.books || null,
-    },
-  }
-}
-
-export default function HomePage({ books, status }) {
+export default function HomePage() {
   return (
     <div className="container">
       <Head>
@@ -24,25 +11,18 @@ export default function HomePage({ books, status }) {
       </Head>
 
       <main>
-        <h1 className="title">ward's reading list</h1>
+        <h1 className="title">add</h1>
 
         <p className="description">
-          <Link href="/about">
-            <a>about this list</a>
+          add a book to the reading list
+          <br />
+          <Link href="/">
+            <a>back home</a>
           </Link>
         </p>
-        {status === 'success' ? (
-          books.map((book) => <p key={book.id}>{book.name}</p>)
-        ) : (
-          <p>error with request</p>
-        )}
-
-        <Link href="/add">
-          <a>add to list</a>
-        </Link>
       </main>
 
-      <footer>{new Date().getFullYear()} alephnode</footer>
+      <footer>2020 alephnode</footer>
 
       <style jsx>{`
         .container {
