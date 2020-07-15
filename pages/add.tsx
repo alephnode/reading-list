@@ -2,8 +2,7 @@ import { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { insertBookAuthor } from '../mutations'
-import fetchAPI from '../lib/fetchAPI'
-import statusMessages from '../lib/statusMessages'
+import { fetchAPI, statusMessages } from '../lib'
 
 export default function HomePage() {
   const [authorName, setAuthorName] = useState('')
