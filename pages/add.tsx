@@ -2,32 +2,21 @@ import { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { insertBookAuthor } from '../mutations'
+import fetchAPI from '../lib/fetchAPI'
+import statusMessages from '../lib/statusMessages'
 
 export default function HomePage() {
   const [authorName, setAuthorName] = useState('')
   const [bookName, setBookName] = useState('')
-
-  const fetcher = async () => {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-hasura-admin-secret': process.env.HASURA_ACCESS_SECRET,
-    }
-
-    const res = await (
-      await fetch(process.env.HASURA_API_ENDPOINT, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({ query: insertBookAuthor(authorName, bookName) }),
-      })
-    ).json()
-
-    return res
-  }
+  const [status, setStatus] = useState(statusMessages.ready)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = await fetcher()
-    console.log(res)
+    const res = await fetchAPI(insertBookAuthor(authorName, bookName))
+    const responseStatus = res.errors
+      ? statusMessages.error
+      : statusMessages.success
+    setStatus(responseStatus)
   }
 
   return (
@@ -42,25 +31,29 @@ export default function HomePage() {
 
         <p className="description">add a book to the reading list</p>
         <br />
-        <form onSubmit={async (e) => handleSubmit(e)}>
-          <label>
-            Book Name:
-            <input
-              type="text"
-              value={bookName}
-              onChange={(e) => setBookName(e.target.value)}
-            />
-          </label>
-          <label>
-            Author Name:
-            <input
-              type="text"
-              value={authorName}
-              onChange={(e) => setAuthorName(e.target.value)}
-            />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        {status === statusMessages.success && <p>success! book added.</p>}
+        {status === statusMessages.error && <p>error adding book.</p>}
+        {status === statusMessages.ready && (
+          <form onSubmit={async (e) => handleSubmit(e)}>
+            <label>
+              Book Name:
+              <input
+                type="text"
+                value={bookName}
+                onChange={(e) => setBookName(e.target.value)}
+              />
+            </label>
+            <label>
+              Author Name:
+              <input
+                type="text"
+                value={authorName}
+                onChange={(e) => setAuthorName(e.target.value)}
+              />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+        )}
         <Link href="/">
           <a>back home</a>
         </Link>
