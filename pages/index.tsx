@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import fetchAPI from '../lib/fetchAPI'
+import Footer from '../lib/components/footer'
+import fetchAPI from '../lib/utils/fetchAPI'
 import { getBooksQuery } from '../queries'
 import { GetServerSideProps } from 'next'
 
@@ -42,7 +43,7 @@ export default function HomePage({ books, status }) {
         </Link>
       </main>
 
-      <footer>{new Date().getFullYear()} alephnode</footer>
+      <Footer />
 
       <style jsx>{`
         .container {
@@ -59,25 +60,6 @@ export default function HomePage({ books, status }) {
           flex: 1;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
           justify-content: center;
           align-items: center;
         }

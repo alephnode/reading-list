@@ -2,7 +2,8 @@ import { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { insertBookAuthor } from '../mutations'
-import { fetchAPI, statusMessages } from '../lib'
+import { fetchAPI, statusMessages } from '../lib/utils'
+import Footer from '../lib/components/footer'
 
 export default function HomePage() {
   const [authorName, setAuthorName] = useState('')
@@ -58,7 +59,7 @@ export default function HomePage() {
         </Link>
       </main>
 
-      <footer>2020 alephnode</footer>
+      <Footer />
 
       <style jsx>{`
         .container {
@@ -75,25 +76,6 @@ export default function HomePage() {
           flex: 1;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
           justify-content: center;
           align-items: center;
         }
