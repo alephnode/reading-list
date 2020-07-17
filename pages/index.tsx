@@ -4,6 +4,7 @@ import Footer from '../lib/components/footer'
 import fetchAPI from '../lib/utils/fetchAPI'
 import { getBooksQuery } from '../queries'
 import { GetServerSideProps } from 'next'
+import { deleteBook } from '../mutations'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data = {}, errors } = await fetchAPI(getBooksQuery)
@@ -17,6 +18,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
 }
 
 export default function HomePage({ books, status }) {
+  const handleClick = async (bookId) => {
+    const res = await fetchAPI(deleteBook(bookId))
+    console.log(res)
+  }
   return (
     <div className="container">
       <Head>
@@ -33,7 +38,12 @@ export default function HomePage({ books, status }) {
           </Link>
         </p>
         {status === 'success' ? (
-          books.map((book) => <p key={book.id}>{book.name}</p>)
+          books.map((book) => (
+            <div key={book.id}>
+              <p>{book.name}</p>
+              <button onClick={() => handleClick(book.id)}>delete</button>
+            </div>
+          ))
         ) : (
           <p>error with request</p>
         )}

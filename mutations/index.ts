@@ -12,3 +12,12 @@ export const insertBookAuthor = (authorName, bookName) => `mutation MyMutation {
   }
 }
 `
+
+export const deleteBook = (bookId) => `mutation MyMutation {
+  delete_book_authors(where: {book_id: {_eq: ${bookId}}}) {
+    affected_rows
+  }
+  delete_books(where: {id: {_eq: ${bookId}}}) {
+    affected_rows
+  }
+}`
