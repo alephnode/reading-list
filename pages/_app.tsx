@@ -22,7 +22,9 @@ export default function MyApp({ Component, pageProps }) {
       <Content style={{ padding: '0 50px' }}>
         <Component {...pageProps} />
       </Content>
-      <Footer style={{ textAlign: 'center' }}>Ward</Footer>
+      <Footer style={{ textAlign: 'center' }}>
+        {new Date().getFullYear()} alephnode
+      </Footer>
     </Layout>
   )
 }
