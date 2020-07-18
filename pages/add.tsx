@@ -5,7 +5,7 @@ import { fetchAPI, statusMessages } from '../lib/utils'
 export default function AddPage() {
   const [authorName, setAuthorName] = useState('')
   const [bookName, setBookName] = useState('')
-  const [status, setStatus] = useState(statusMessages.ready)
+  const [status, setStatus] = useState(statusMessages.unresolved)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -24,7 +24,7 @@ export default function AddPage() {
       <br />
       {status === statusMessages.success && <p>success! book added.</p>}
       {status === statusMessages.error && <p>error adding book.</p>}
-      {status === statusMessages.ready && (
+      {status === statusMessages.unresolved && (
         <form onSubmit={async (e) => handleSubmit(e)}>
           <label>
             Book Name:

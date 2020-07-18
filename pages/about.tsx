@@ -1,6 +1,6 @@
 export default function AboutPage() {
   return (
-    <div className="container">
+    <>
       <h1 className="title">about</h1>
 
       <p className="description">
@@ -8,6 +8,6 @@ export default function AboutPage() {
         Hasura-based GraphQL API from it. Fun stuff.
         <br />
       </p>
-    </div>
+    </>
   )
 }

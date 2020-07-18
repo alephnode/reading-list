@@ -22,6 +22,7 @@ export default function HomePage({ books, status }) {
 
   return (
     <>
+      <h1 className="title">books</h1>
       {status === statusMessages.success ? (
         books.map((book) => (
           <div key={book.id}>
