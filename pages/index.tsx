@@ -1,7 +1,7 @@
 import { statusMessages, fetchAPI } from '../lib/utils'
 import { getBooksQuery } from '../queries'
 import { GetServerSideProps } from 'next'
-import BookList from '../lib/components/Booklist'
+import BookList from '../lib/components/BookList'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data = {}, errors } = await fetchAPI(getBooksQuery)

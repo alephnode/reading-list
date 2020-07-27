@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest --watch"
   },
   "dependencies": {
     "antd": "^4.4.2",
@@ -18,6 +19,9 @@
   "devDependencies": {
     "@types/node": "^14.0.14",
     "@types/react": "^16.9.41",
+    "babel-jest": "^26.1.0",
+    "jest": "^26.1.0",
+    "react-test-renderer": "^16.13.1",
     "typescript": "^3.9.5"
   }
 }
