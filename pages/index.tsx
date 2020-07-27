@@ -13,11 +13,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-export default function HomePage({ books, status }) {
+export default function HomePage(props) {
   return (
     <>
       <h1 className="title">books</h1>
-      <BookList books={books} status={status} />
+      <BookList {...props} />
     </>
   )
 }
