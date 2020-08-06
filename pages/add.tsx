@@ -22,9 +22,9 @@ export default function AddPage() {
 
       <p className="description">add a book to the reading list</p>
       <br />
-      {status === statusMessages.success && <p>success! book added.</p>}
-      {status === statusMessages.error && <p>error adding book.</p>}
-      {status === statusMessages.unresolved && (
+      {status === statusMessages.success ? <p>success! book added.</p> : null}
+      {status === statusMessages.error ? <p>error adding book.</p> : null}
+      {status === statusMessages.unresolved ? (
         <form onSubmit={async (e) => handleSubmit(e)}>
           <label>
             Book Name:
@@ -44,7 +44,7 @@ export default function AddPage() {
           </label>
           <input type="submit" value="Submit" />
         </form>
-      )}
+      ) : null}
     </>
   )
 }
