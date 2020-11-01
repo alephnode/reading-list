@@ -9,15 +9,15 @@ export default function BookList({ books }) {
   }
 
   return (
-    <>
+    <div style={{textAlign: 'center'}}>
         {books.map((book) => (
-          <div key={book.id}>
+          <div key={book.id} style={{marginBottom: '2rem'}}>
             <p>{book.name}</p>
             <Button type="primary" onClick={() => handleClick(book.id)}>
               delete
             </Button>
           </div>
         ))}
-    </>
+    </div>
   )
 }
