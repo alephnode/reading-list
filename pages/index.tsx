@@ -17,7 +17,7 @@ export default function HomePage(props) {
   return (
     <>
       <h1 className="title">books</h1>
-      <BookList {...props} />
+      {props.status === statusMessages.error ? <p>issue loading books.</p> : <BookList {...props} />}
     </>
   )
 }
