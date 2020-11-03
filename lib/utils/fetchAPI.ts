@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+import axios from 'axios'
 
 export default async function fetchAPI(query) {
   const headers = {
@@ -7,14 +7,10 @@ export default async function fetchAPI(query) {
   }
 
   const res = await (
-    await fetch(process.env.HASURA_API_ENDPOINT, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({
-        query,
-      }),
-    })
-  ).json()
+    await axios.post(process.env.HASURA_API_ENDPOINT, 
+      JSON.stringify({query}), 
+      { headers })
+  ).data
 
   return res
 }
