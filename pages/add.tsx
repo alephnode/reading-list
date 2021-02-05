@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { insertBookAuthor } from '../mutations'
 import { fetchAPI, statusMessages } from '../lib/utils'
 
@@ -7,7 +7,7 @@ export default function AddPage() {
   const [bookName, setBookName] = useState('')
   const [status, setStatus] = useState(statusMessages.unresolved)
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const res = await fetchAPI(insertBookAuthor(authorName, bookName))
     const responseStatus = res.errors
@@ -25,7 +25,7 @@ export default function AddPage() {
       {status === statusMessages.success ? <p>success! book added.</p> : null}
       {status === statusMessages.error ? <p>error adding book.</p> : null}
       {status === statusMessages.unresolved ? (
-        <form onSubmit={async (e) => handleSubmit(e)}>
+        <form onSubmit={handleSubmit}>
           <label>
             Book Name:
             <input
