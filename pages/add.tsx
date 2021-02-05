@@ -1,18 +1,20 @@
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
+import { Form, Input, Button } from 'antd'
 import { insertBookAuthor } from '../mutations'
 import { fetchAPI, statusMessages } from '../lib/utils'
 
+interface FormValues {
+  bookName: string
+  authorName: string
+}
+
 export default function AddPage() {
-  const [authorName, setAuthorName] = useState('')
-  const [bookName, setBookName] = useState('')
   const [status, setStatus] = useState(statusMessages.unresolved)
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async ({ bookName, authorName }: FormValues) => {
     const res = await fetchAPI(insertBookAuthor(authorName, bookName))
-    const responseStatus = res.errors
-      ? statusMessages.error
-      : statusMessages.success
+    const responseStatus =
+      !res || res.errors ? statusMessages.error : statusMessages.success
     setStatus(responseStatus)
   }
 
@@ -25,25 +27,39 @@ export default function AddPage() {
       {status === statusMessages.success ? <p>success! book added.</p> : null}
       {status === statusMessages.error ? <p>error adding book.</p> : null}
       {status === statusMessages.unresolved ? (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Book Name:
-            <input
-              type="text"
-              value={bookName}
-              onChange={(e) => setBookName(e.target.value)}
-            />
-          </label>
-          <label>
-            Author Name:
-            <input
-              type="text"
-              value={authorName}
-              onChange={(e) => setAuthorName(e.target.value)}
-            />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <Form layout="vertical" name="basic" onFinish={handleSubmit}>
+          <Form.Item
+            label="Book Name"
+            name="bookName"
+            rules={[
+              {
+                required: true,
+                message: 'Please input book name!',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Author Name"
+            name="authorName"
+            rules={[
+              {
+                required: true,
+                message: 'Please input author name!',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
       ) : null}
     </>
   )

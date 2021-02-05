@@ -9,6 +9,10 @@ interface HomePageProps {
   books: Book[] | null
 }
 
+const titleStyles = {
+  fontSize: '2em',
+}
+
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data = {}, errors } = await fetchAPI(getBooksQuery)
   return {
@@ -22,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 export default function HomePage(props: HomePageProps) {
   return (
     <>
-      <h1 className="title">books</h1>
+      <h1 style={titleStyles}>reading list</h1>
       {props.status === statusMessages.error ? (
         <p>issue loading books.</p>
       ) : (
